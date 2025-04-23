@@ -1,25 +1,21 @@
 import { JpModalFuncProps } from '@/components/render/install';
 import { PrismaClient } from '@prisma/client';
 declare global {
-  interface PySuccessResponse<R> {
+  interface SuccessResponse<R> {
     success: true;
     data: R;
   }
 
-  interface PyErrorResponse {
+  interface ErrorResponse {
     success: false;
     msg: string;
     code?: number | string;
     nextOption?: string;
   }
 
-  declare type PyResponse<R> = PyErrorResponse | PySuccessResponse<R>;
+  declare type Response<R> = ErrorResponse | SuccessResponse<R>;
 
-  declare type PyPromise<R> = Promise<PyResponse<R>>;
-
-  interface GlobalThis {
-    prisma?: PrismaClient;
-  }
+  declare type JPPromise<R> = Promise<Response<R>>;
 
   interface Window {
     $alert: (arg: string | React.ReactElement | JpModalFuncProps) => void;
