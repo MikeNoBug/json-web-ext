@@ -6,6 +6,7 @@ enum IconConfig {
   question = 'iconfont-question-line',
   repeair = 'iconfont-hammer-line',
   imageUpload = 'iconfont-image-upload',
+  fullScreen = 'iconfont-fullscreen-line',
 }
 
 export default IconConfig;

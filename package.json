@@ -6,13 +6,12 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devWeb": "cd ./packages/popup && npm run dev",
-    "build": "cd ./packages/popup && npm run build && cd ../../ && node build.js"
+    "dev:web": "cd ./packages/popup && npm run dev",
+    "build": "cd ./packages/popup && npm run build && cd ../../ && node build.js",
+    "dev:ext": "pnpm run --filter \"./packages/popup\" dev:ext & pnpm run --filter \"./packages/config\" dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "fs-extra": "^11.3.0"
-  }
+  "dependencies": {}
 }

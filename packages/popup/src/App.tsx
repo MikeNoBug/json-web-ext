@@ -5,7 +5,15 @@ import JsonParse from './pages/json-parse';
 function App() {
   return (
     <ConfigProvider theme={style}>
-      <AntdApp style={{ height: '600px', width: '800px' }} className='py-lg px-md'>
+      <AntdApp
+        style={
+          window.container === 'ext'
+            ? { height: '600px', width: '800px' }
+            : {
+                height: '100vh',
+              }
+        }
+        className='py-lg px-md'>
         <>
           <JsonParse></JsonParse>
           <Install></Install>

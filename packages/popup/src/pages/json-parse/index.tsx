@@ -7,6 +7,8 @@ import { Result } from './interface';
 import JsonParseError from './json-parse-error';
 import JSONParseResultItem from './json-parse-result-item';
 import ClipBorad from 'clipboard';
+import Icon from '@/components/render/icon';
+import { openWindow } from '@/util/openWindow';
 
 const JsonParse: React.FC = () => {
   const [jsonStr, setJsonStr] = useState('');
@@ -101,15 +103,18 @@ const JsonParse: React.FC = () => {
     });
   });
 
+  const handleFullScreen = useMemoizedFn(async () => {
+    openWindow('./popup/index.html?container=web', 1280, 800);
+  });
+
   return (
     <div className='w-full h-full bg-white row-start-start'>
       <Input.TextArea className='!h-full !w-1/2' draggable={false} value={jsonStr} placeholder='请输入json字符串' onChange={handleJsonStrChange}></Input.TextArea>
       <div className='col-start-start w-1/2 border-solid border-l-0 border-bc !h-full rounded-sm'>
-        <div className='row-start-center h-52 border-solid w-full border-l-0 border-r-0 border-t-0 border-b-1 border-bc'>
+        <div className='row-start-center h-52 border-solid w-full border-l-0 border-r-0 border-t-0 border-b-1 border-bc px-md'>
           {showTransfer ? (
             <Button
               type='primary'
-              className='ml-md'
               onClick={() => {
                 setShowTransfer(false);
               }}>
@@ -125,13 +130,14 @@ const JsonParse: React.FC = () => {
               显示转义符
             </Button>
           )}
-
           <Button type='primary' className='ml-md' id='clib-btn-json-parse' onClick={handleCopy} data-clipboard-target='.json-parse-result-con'>
             复制
           </Button>
           <Checkbox className='ml-md' checked={sortFlag} onChange={handleSortChange}>
             按升序排序
           </Checkbox>
+          <div className='flex-1'></div>
+          {window.container === 'ext' ? <Icon type='fullScreen' className='cursor-pointer' onClick={handleFullScreen}></Icon> : null}
         </div>
         <div className='h-0 overflow-auto flex-1 p-sm json-parse-result-con w-full'>
           {result?.error ? <JsonParseError error={result.error}></JsonParseError> : null}

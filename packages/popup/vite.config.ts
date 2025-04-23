@@ -5,6 +5,7 @@ import * as path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  envPrefix: ['CONTAINER'],
   css: {
     preprocessorOptions: {
       less: {
@@ -18,8 +19,9 @@ export default defineConfig({
       { find: '@', replacement: path.resolve('src') },
     ],
   },
+  base: './',
   build: {
-    outDir: '../../dist',
+    outDir: '../../dist/popup',
     emptyOutDir: true,
   },
 });

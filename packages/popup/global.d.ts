@@ -29,6 +29,8 @@ declare global {
     $error: (arg: string, duration?: number) => void;
     $showLoading: (tip: string) => void;
     $hideLoading: () => void;
+
+    container: 'ext' | 'web';
   }
 
   type PickProps<T> = {
