@@ -1,5 +1,5 @@
 'use client';
-import { useMemoizedFn } from 'ahooks';
+import { useMemoizedFn, useMount } from 'ahooks';
 import { Button, Checkbox, Input } from 'antd';
 import { useRef, useState } from 'react';
 import { parse } from './jsonParse';
@@ -9,6 +9,7 @@ import JSONParseResultItem from './json-parse-result-item';
 import ClipBorad from 'clipboard';
 import Icon from '@/components/render/icon';
 import { openWindow } from '@/util/openWindow';
+import { ChromeLocalKey } from '@/lib/chromeLocalKey';
 
 const JsonParse: React.FC = () => {
   const [jsonStr, setJsonStr] = useState('');
@@ -16,6 +17,27 @@ const JsonParse: React.FC = () => {
   const [sortFlag, setSortFlag] = useState(false);
   const [showTransfer, setShowTransfer] = useState(true);
   const changeTimer = useRef(0);
+
+  useMount(() => {
+    if (import.meta.env.CONTAINER !== 'ext') {
+      return;
+    }
+    chrome.storage.local.get([ChromeLocalKey.JSONVALUE], (res) => {
+      if (!res) {
+        return;
+      }
+      const value = res[ChromeLocalKey.JSONVALUE];
+      if (typeof value !== 'undefined' && value !== '') {
+        console.log('wq_change');
+        chrome.storage.local.remove([ChromeLocalKey.JSONVALUE]);
+        handleJsonStrChange({
+          target: {
+            value,
+          },
+        });
+      }
+    });
+  });
   const handleJsonStrChange = useMemoizedFn((e) => {
     const value = e.target.value;
     setJsonStr(value);
@@ -104,7 +126,9 @@ const JsonParse: React.FC = () => {
   });
 
   const handleFullScreen = useMemoizedFn(async () => {
-    openWindow('./popup/index.html?container=web', 1280, 800);
+    chrome.storage.local.set({ [ChromeLocalKey.JSONVALUE]: jsonStr }, () => {
+      openWindow('./popup/index.html?container=web', 1280, 800);
+    });
   });
 
   return (

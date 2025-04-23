@@ -1,11 +1,12 @@
 let currentWindowId: number | undefined;
+
 export async function openWindow(url: string, width: number, height: number) {
   if (typeof chrome === 'undefined' || !chrome.windows) {
     return;
   }
   try {
     if (currentWindowId) {
-      await chrome.windows.remove(currentWindowId);
+      chrome.windows.remove(currentWindowId);
     }
     const res = await chrome.windows.create({
       url,
@@ -15,7 +16,6 @@ export async function openWindow(url: string, width: number, height: number) {
     });
     currentWindowId = res.id;
   } catch (err: any) {
-    console.error(err);
     currentWindowId = undefined;
   }
 }
