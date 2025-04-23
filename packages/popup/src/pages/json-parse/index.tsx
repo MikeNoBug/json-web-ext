@@ -8,7 +8,6 @@ import JsonParseError from './json-parse-error';
 import JSONParseResultItem from './json-parse-result-item';
 import ClipBorad from 'clipboard';
 import Icon from '@/components/render/icon';
-import { openWindow } from '@/util/openWindow';
 import { ChromeLocalKey } from '@/lib/chromeLocalKey';
 
 const JsonParse: React.FC = () => {
@@ -126,8 +125,17 @@ const JsonParse: React.FC = () => {
   });
 
   const handleFullScreen = useMemoizedFn(async () => {
-    chrome.storage.local.set({ [ChromeLocalKey.JSONVALUE]: jsonStr }, () => {
-      openWindow('./popup/index.html?container=web', 1280, 800);
+    chrome.storage.local.set({ [ChromeLocalKey.JSONVALUE]: jsonStr }, async () => {
+      const request: OpenWindowRequest = {
+        type: 'openWindow',
+        data: {
+          url: './popup/index.html?container=web',
+          width: 1280,
+          height: 800,
+        },
+      };
+      await chrome.runtime.sendMessage(request);
+      window.close();
     });
   });
 

@@ -8,6 +8,18 @@ importers:
 
   .: {}
 
+  packages/background:
+    dependencies:
+      '@types/chrome':
+        specifier: ^0.0.316
+        version: 0.0.316
+      typescript:
+        specifier: ^5
+        version: 5.8.3
+      vite:
+        specifier: ^5.2.0
+        version: 5.4.18(@types/node@20.17.30)(less@4.3.0)
+
   packages/config:
     devDependencies:
       chokidar:
@@ -16,6 +28,15 @@ importers:
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
+
+  packages/content:
+    dependencies:
+      typescript:
+        specifier: ^5
+        version: 5.8.3
+      vite:
+        specifier: ^5.2.0
+        version: 5.4.18(@types/node@20.17.30)(less@4.3.0)
 
   packages/popup:
     dependencies:

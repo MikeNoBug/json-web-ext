@@ -3,8 +3,19 @@
   "name": "json-parse",
   "version": "1.0",
   "description": "json解析",
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab", "scripting", "contextMenus"],
   "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "./background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./content/index.js"],
+      "run_at": "document_end"
+    }
+  ],
   "action": {
     "default_popup": "./popup/index.html",
     "default_icon": {
