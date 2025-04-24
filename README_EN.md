@@ -24,9 +24,11 @@ A Chrome browser extension for parsing and formatting JSON.
 4. Click "Load unpacked extension"
 5. Select the project's build directory
 
-## Usage
+## Feature Demonstration
 
 ### Method 1: Click Extension Icon
+
+![Click Extension Icon Demo](./assets/popup-demo.gif)
 
 1. Click the extension icon in the browser toolbar
 2. Paste or input JSON string in the input box
@@ -34,9 +36,33 @@ A Chrome browser extension for parsing and formatting JSON.
 
 ### Method 2: Right-click Menu
 
+![Right-click Menu Demo](./assets/context-menu-demo.gif)
+
 1. Select JSON text on the webpage
 2. Right-click and select "Parse JSON"
 3. Automatically open parsing window and display results
+
+## Core Features
+
+### JSON Formatting and Collapsing
+
+![Formatting and Collapsing Demo](./assets/format-demo.gif)
+
+Supports JSON data formatting display and node expansion/collapse operations, making it easier to browse complex JSON structures.
+
+### Quick Error Location
+
+![Quick Error Location Demo](./assets/error-location-demo.gif)
+
+### More Useful Features
+
+![Other Features Demo](./assets/features-demo.gif)
+
+- One-click copy of formatted results
+- Sort by key name in ascending order
+- Remove escape characters
+- Fullscreen mode viewing
+- Quick error location
 
 ## Project Structure
 
