@@ -40,12 +40,14 @@ A Chrome browser extension for parsing and formatting JSON.
 
 ## Project Structure
 
+```
 json-web-ext/
 ├── packages/
-│ ├── background/ # Background scripts
-│ ├── content/ # Content scripts
-│ ├── popup/ # Popup window
-│ └── config/ # Configuration files
+    ├── background/ # Background scripts
+    ├── content/ # Content scripts
+    ├── popup/ # Popup window
+    └── config/ # Configuration files
+```
 
 ## Development Guide
 

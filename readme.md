@@ -40,12 +40,14 @@
 
 ## 项目结构
 
+```
 json-web-ext/
 ├── packages/
-│ ├── background/ # 后台脚本
-│ ├── content/ # 内容脚本
-│ ├── popup/ # 弹出窗口
-│ └── config/ # 配置文件
+    ├── background/ # 后台脚本
+    ├── content/ # 内容脚本
+    ├── popup/ # 弹出窗口
+    └── config/ # 配置文件
+```
 
 ## 开发说明
 
