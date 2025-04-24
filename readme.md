@@ -1,5 +1,7 @@
 # JSON Parse 浏览器扩展
 
+中文 | [English](./README_EN.md)
+
 一个用于解析和格式化 JSON 的 Chrome 浏览器扩展。
 
 ## 功能特点
