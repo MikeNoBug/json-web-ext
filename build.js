@@ -1,8 +1,8 @@
 import fs from "fs-extra";
 
 const main = () => {
-  fs.copySync("./packages/config/manifest.json", "dist/manifest.json");
-  fs.copySync("./packages/config/icons", "dist/icons");
+  fs.copySync("./packages/config/src/manifest.json", "dist/manifest.json");
+  fs.copySync("./packages/config/src/icons", "dist/icons");
 };
 
 main();
