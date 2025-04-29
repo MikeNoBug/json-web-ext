@@ -18,7 +18,7 @@
 
 ## 安装方法
 
-1. [下载压缩包](https://github.com/MikeNoBug/json-web-ext/releases/download/1.1/json-parse-webext-1.1.zip)，解压缩
+1. [下载压缩包](https://github.com/MikeNoBug/json-web-ext/releases/download/1.0.1/json-web-ext-1.0.1.zip)，解压缩
 2. 打开 Chrome 浏览器，进入扩展程序页面（chrome://extensions/）
 3. 开启"开发者模式"
 4. 点击"加载已解压的扩展程序"

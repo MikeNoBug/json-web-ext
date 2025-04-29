@@ -18,7 +18,7 @@ A Chrome browser extension for parsing and formatting JSON.
 
 ## Installation
 
-1. [Download the zip file](https://github.com/MikeNoBug/json-web-ext/releases/download/1.1/json-parse-webext-1.1.zip) and extract it
+1. [Download the zip file](https://github.com/MikeNoBug/json-web-ext/releases/download/1.0.1/json-web-ext-1.0.1.zip) and extract it
 2. Open Chrome browser and go to the extensions page (chrome://extensions/)
 3. Enable "Developer mode"
 4. Click "Load unpacked extension"
