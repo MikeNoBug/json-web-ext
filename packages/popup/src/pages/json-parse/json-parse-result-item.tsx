@@ -73,7 +73,7 @@ const JSONParseResultItem: React.FC<JSONParseResultItemProps> = (props) => {
   if (item.hideCount === 1 && item.dataType === 'leftBracket') {
     return (
       <div className='text-lg' style={{ paddingLeft: item.level * 12 + 'px' }}>
-        {item.keyName ? <span className='font-bold text-primary'>{item.keyName}</span> : null}
+        {item.keyName ? <span className='font-bold text-primary'>&quot;{item.keyName}&quot;</span> : null}
         {item.keyName ? <span>:</span> : null}
         <span>
           <Icon type='circlePlus' className='mr-xs cursor-pointer' onClick={handleToggle}></Icon>
