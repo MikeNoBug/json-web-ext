@@ -13,5 +13,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "devDependencies": {
+    "fs-extra": "^11.3.0"
+  }
 }

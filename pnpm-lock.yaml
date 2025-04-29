@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      fs-extra:
+        specifier: ^11.3.0
+        version: 11.3.0
 
   packages/background:
     dependencies:
