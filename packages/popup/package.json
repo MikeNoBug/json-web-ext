@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:ext": "tsc && vite build --mode ext",
     "dev:ext": "vite build --mode ext --watch "
   },
   "type": "module",
