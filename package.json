@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:web": "pnpm run --filter \"./packages/popup\" dev",
-    "build": "cd ./packages/popup && npm run build && cd ../../ && node build.js",
+    "build": "cd ./packages/popup && npm run build:ext && cd ../../ && node build.js",
     "dev:ext": "pnpm run --filter \"./packages/popup\" dev:ext & pnpm run --filter \"./packages/config\" dev & pnpm run --filter \"./packages/background\" dev & pnpm run --filter \"./packages/content\" dev"
   },
   "keywords": [],
