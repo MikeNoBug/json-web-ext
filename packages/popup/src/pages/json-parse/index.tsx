@@ -8,7 +8,7 @@ import JsonParseError from './json-parse-error';
 import JSONParseResultItem from './json-parse-result-item';
 import ClipBorad from 'clipboard';
 import Icon from '@/components/render/icon';
-import { ChromeLocalKey } from '@/lib/chromeLocalKey';
+import { saveJsonParseCache, getJsonParseCache, clearJsonParseCache } from './storage';
 
 const JsonParse: React.FC = () => {
   const [jsonStr, setJsonStr] = useState('');
@@ -17,40 +17,43 @@ const JsonParse: React.FC = () => {
   const [showTransfer, setShowTransfer] = useState(true);
   const changeTimer = useRef(0);
 
-  useMount(() => {
+  useMount(async () => {
     if (import.meta.env.CONTAINER !== 'ext') {
       return;
     }
-    chrome.storage.local.get([ChromeLocalKey.JSONVALUE], (res) => {
-      if (!res) {
-        return;
-      }
-      const value = res[ChromeLocalKey.JSONVALUE];
-      if (typeof value !== 'undefined' && value !== '') {
-        console.log('wq_change');
-        chrome.storage.local.remove([ChromeLocalKey.JSONVALUE]);
-        handleJsonStrChange({
-          target: {
-            value,
-          },
-        });
-      }
-    });
+    const value = await getJsonParseCache();
+    if (value) {
+      await clearJsonParseCache();
+      handleJsonStrChange({
+        target: {
+          value,
+        },
+      });
+    }
   });
-  const handleJsonStrChange = useMemoizedFn((e) => {
+  const handleJsonStrChange = useMemoizedFn(async (e) => {
     const value = e.target.value;
     setJsonStr(value);
     clearTimeout(changeTimer.current);
-    changeTimer.current = window.setTimeout(() => {
-      console.log('wq', parse(value, sortFlag));
-      setResult(parse(value, sortFlag));
+    changeTimer.current = window.setTimeout(async () => {
+      const parseResult = parse(value, sortFlag);
+      setResult(parseResult);
+      // 保存当前状态到缓存
+      if (import.meta.env.CONTAINER === 'ext') {
+        await saveJsonParseCache(value);
+      }
     }, 300);
   });
 
-  const handleSortChange = useMemoizedFn(() => {
+  const handleSortChange = useMemoizedFn(async () => {
     const value = !sortFlag;
     setSortFlag(value);
-    setResult(parse(jsonStr, value));
+    const parseResult = parse(jsonStr, value);
+    setResult(parseResult);
+    // 保存当前状态到缓存
+    if (import.meta.env.CONTAINER === 'ext') {
+      await saveJsonParseCache(jsonStr);
+    }
   });
 
   const handleToggleExpand = useMemoizedFn((index) => {
@@ -125,18 +128,19 @@ const JsonParse: React.FC = () => {
   });
 
   const handleFullScreen = useMemoizedFn(async () => {
-    chrome.storage.local.set({ [ChromeLocalKey.JSONVALUE]: jsonStr }, async () => {
-      const request: OpenWindowRequest = {
-        type: 'openWindow',
-        data: {
-          url: './popup/index.html?container=web',
-          width: 1280,
-          height: 800,
-        },
-      };
-      await chrome.runtime.sendMessage(request);
-      window.close();
-    });
+    // 保存当前状态
+    await saveJsonParseCache(jsonStr);
+
+    const request: OpenWindowRequest = {
+      type: 'openWindow',
+      data: {
+        url: './popup/index.html?container=web',
+        width: 1280,
+        height: 800,
+      },
+    };
+    await chrome.runtime.sendMessage(request);
+    window.close();
   });
 
   return (
