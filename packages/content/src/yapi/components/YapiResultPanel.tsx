@@ -106,7 +106,7 @@ export const YapiResultPanel: React.FC<YapiResultPanelProps> = ({
     try {
       const markdownContent = generateMarkdownDoc(data.data);
       await navigator.clipboard.writeText(markdownContent);
-      message.success("Markdown文档已复制到剪贴板", 10000);
+      message.success("Markdown文档已复制到剪贴板");
     } catch (error) {
       message.error("复制失败，请重试");
     }
