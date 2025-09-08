@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { ConfigProvider, message } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import { YapiButton } from "./YapiButton";
@@ -61,6 +61,14 @@ export const YapiApp: React.FC<YapiAppProps> = ({ domain, interfaceId }) => {
   const handleClosePanel = useCallback(() => {
     setPanelVisible(false);
     setResultData(null);
+  }, []);
+
+  useEffect(() => {
+    message.config({
+      getContainer: () => {
+        return document.getElementById("yapi-app-container") as HTMLElement;
+      },
+    });
   }, []);
 
   return (

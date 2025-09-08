@@ -19,12 +19,6 @@
   box-sizing: border-box;
 }
 
-/* 确保按钮和面板在页面最顶层 */
-#yapi-app-container .ant-btn {
-  position: fixed !important;
-  z-index: 2147483647 !important;
-}
-
 #yapi-app-container .ant-card {
   position: fixed !important;
   z-index: 2147483647 !important;

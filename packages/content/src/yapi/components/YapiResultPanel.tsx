@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, Button, Typography, message, Space } from "antd";
-import { CopyOutlined } from "@ant-design/icons";
+import { Card, Button, Typography, message } from "antd";
+import { CopyOutlined, CloseOutlined } from "@ant-design/icons";
 import { ApiResponse, ApiData } from "../types";
 
 const { Text, Paragraph } = Typography;
@@ -92,6 +92,7 @@ interface YapiResultPanelProps {
 export const YapiResultPanel: React.FC<YapiResultPanelProps> = ({
   data,
   visible,
+  onClose,
 }) => {
   if (!visible) return null;
 
@@ -105,7 +106,7 @@ export const YapiResultPanel: React.FC<YapiResultPanelProps> = ({
     try {
       const markdownContent = generateMarkdownDoc(data.data);
       await navigator.clipboard.writeText(markdownContent);
-      message.success("Markdown文档已复制到剪贴板");
+      message.success("Markdown文档已复制到剪贴板", 10000);
     } catch (error) {
       message.error("复制失败，请重试");
     }
@@ -155,23 +156,34 @@ export const YapiResultPanel: React.FC<YapiResultPanelProps> = ({
         <div
           style={{
             display: "flex",
-            justifyItems: "start",
+            justifyContent: "space-between",
             alignItems: "center",
           }}
         >
           <span>接口文档</span>
-          {!data.error && data.data && (
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {!data.error && data.data && (
+              <Button
+                type="primary"
+                size="small"
+                icon={<CopyOutlined />}
+                onClick={handleCopyMarkdown}
+                title="复制Markdown文档"
+              >
+                复制
+              </Button>
+            )}
             <Button
               type="text"
               size="small"
-              style={{ marginLeft: 8 }}
-              icon={<CopyOutlined />}
-              onClick={handleCopyMarkdown}
-              title="复制Markdown文档"
+              icon={<CloseOutlined />}
+              onClick={onClose}
+              title="关闭面板"
+              style={{ color: "#666" }}
             >
-              复制
+              关闭
             </Button>
-          )}
+          </div>
         </div>
       }
       size="small"
