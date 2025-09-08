@@ -1,0 +1,147 @@
+/* YApi Content Script 样式 */
+
+/* 确保Antd样式不与页面样式冲突 */
+#yapi-app-container {
+  /* 重置一些可能被页面样式影响的属性 */
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 14px;
+  line-height: 1.5715;
+  color: rgba(0, 0, 0, 0.85);
+  box-sizing: border-box;
+}
+
+#yapi-app-container *,
+#yapi-app-container *::before,
+#yapi-app-container *::after {
+  box-sizing: border-box;
+}
+
+/* 确保按钮和面板在页面最顶层 */
+#yapi-app-container .ant-btn {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+}
+
+#yapi-app-container .ant-card {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+}
+
+/* 确保消息提示在最顶层 */
+.ant-message {
+  z-index: 2147483647 !important;
+}
+
+/* 滚动条样式 */
+#yapi-app-container .ant-card-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+#yapi-app-container .ant-card-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+#yapi-app-container .ant-card-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+#yapi-app-container .ant-card-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 代码块样式优化 */
+#yapi-app-container .ant-typography pre {
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 12px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* 确保输入法面板不被遮挡 */
+#yapi-app-container {
+  pointer-events: none;
+}
+
+#yapi-app-container .ant-btn,
+#yapi-app-container .ant-card {
+  pointer-events: auto;
+}
+
+/* 修复icon重复显示问题 */
+#yapi-app-container .ant-btn .anticon {
+  display: inline-block !important;
+}
+
+#yapi-app-container .ant-btn .anticon::before {
+  display: none !important;
+}
+
+/* 确保icon只显示一次 */
+#yapi-app-container .anticon svg {
+  display: block !important;
+}
+
+/* 防止伪元素重复显示icon */
+#yapi-app-container .anticon::before,
+#yapi-app-container .anticon::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 修复按钮内容布局 */
+#yapi-app-container .ant-btn > .ant-btn-loading-icon,
+#yapi-app-container .ant-btn > .anticon {
+  line-height: 1;
+}
+
+/* Card标题区域icon修复 */
+#yapi-app-container .ant-card-extra .anticon {
+  display: inline-block !important;
+}
+
+#yapi-app-container .ant-card-extra .anticon::before {
+  display: none !important;
+}
+
+/* 强制重置所有可能导致icon重复的样式 */
+#yapi-app-container .anticon {
+  font-style: normal !important;
+  vertical-align: baseline !important;
+  text-align: center !important;
+  text-transform: none !important;
+  line-height: 1 !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* 确保只显示SVG，隐藏所有伪元素 */
+#yapi-app-container .anticon:before,
+#yapi-app-container .anticon:after {
+  display: none !important;
+  content: none !important;
+}
+
+/* 防止页面样式影响Antd图标 */
+#yapi-app-container [class*="anticon-"]:before,
+#yapi-app-container [class*="anticon-"]:after {
+  display: none !important;
+  content: none !important;
+}
+
+/* 确保SVG图标正确显示 */
+#yapi-app-container .anticon svg {
+  display: inline-block !important;
+  width: 1em !important;
+  height: 1em !important;
+  fill: currentColor !important;
+  vertical-align: -0.125em !important;
+}
